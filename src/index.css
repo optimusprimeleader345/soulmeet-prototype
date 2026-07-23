@@ -1,0 +1,358 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* ─── Design Tokens ─────────────────────────────────────────────────────────── */
+@theme {
+  --color-soul-bg: #F8F5F1;
+  --color-soul-card: #FFFFFF;
+  --color-soul-primary: #4A3428;
+  --color-soul-primary-light: #6B4C3B;
+  --color-soul-accent: #C9A86A;
+  --color-soul-accent-light: #DFC28E;
+  --color-soul-secondary: #A8B8A5;
+  --color-soul-text: #2D2D2D;
+  --color-soul-text-muted: #8A7968;
+  --color-soul-border: #E8E4DD;
+  --color-soul-border-light: #F0EDE8;
+  --color-soul-surface: #F3EFE9;
+
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --radius-card: 20px;
+  --radius-sm: 10px;
+  --radius-lg: 28px;
+
+  --shadow-card: 0 2px 20px rgba(74, 52, 40, 0.07);
+  --shadow-hover: 0 8px 32px rgba(74, 52, 40, 0.12);
+  --shadow-modal: 0 24px 64px rgba(74, 52, 40, 0.18);
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-soul-bg);
+  color: var(--color-soul-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  line-height: 1.2;
+}
+
+/* ─── Custom Scrollbar ──────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--color-soul-bg); }
+::-webkit-scrollbar-thumb { background: var(--color-soul-border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-soul-accent); }
+
+/* ─── Utility Classes ───────────────────────────────────────────────────────── */
+.font-heading { font-family: var(--font-heading); }
+.font-body { font-family: var(--font-body); }
+
+.soul-card {
+  background: var(--color-soul-card);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-soul-border);
+  box-shadow: var(--shadow-card);
+}
+
+.soul-card-hover {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.soul-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.soul-btn-primary {
+  background: var(--color-soul-primary);
+  color: #fff;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.soul-btn-primary:hover {
+  background: var(--color-soul-primary-light);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(74, 52, 40, 0.25);
+}
+.soul-btn-primary:active { transform: translateY(0); }
+
+.soul-btn-secondary {
+  background: transparent;
+  color: var(--color-soul-primary);
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  border: 1.5px solid var(--color-soul-primary);
+  transition: background 0.2s ease, transform 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.soul-btn-secondary:hover {
+  background: var(--color-soul-primary);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.soul-btn-accent {
+  background: var(--color-soul-accent);
+  color: var(--color-soul-primary);
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.soul-btn-accent:hover {
+  background: var(--color-soul-accent-light);
+  transform: translateY(-1px);
+}
+
+.soul-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1.5px solid var(--color-soul-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-soul-card);
+  color: var(--color-soul-text);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+.soul-input:focus {
+  border-color: var(--color-soul-accent);
+  box-shadow: 0 0 0 3px rgba(201, 168, 106, 0.15);
+}
+.soul-input::placeholder { color: #BDB5A8; }
+
+.soul-label {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-soul-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.soul-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+.soul-badge-accent {
+  background: rgba(201, 168, 106, 0.15);
+  color: #8B6914;
+}
+.soul-badge-primary {
+  background: rgba(74, 52, 40, 0.1);
+  color: var(--color-soul-primary);
+}
+.soul-badge-green {
+  background: rgba(168, 184, 165, 0.25);
+  color: #4A6647;
+}
+.soul-badge-muted {
+  background: var(--color-soul-surface);
+  color: var(--color-soul-text-muted);
+}
+
+/* ─── Page Layout ───────────────────────────────────────────────────────────── */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  min-width: 0;
+  padding: 2rem;
+  background: var(--color-soul-bg);
+}
+
+@media (max-width: 768px) {
+  .main-content { padding: 1rem; }
+}
+
+/* ─── Chart Overrides ───────────────────────────────────────────────────────── */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: var(--color-soul-border);
+}
+.recharts-text { fill: var(--color-soul-text-muted); font-family: var(--font-body); font-size: 12px; }
+.recharts-tooltip-wrapper { font-family: var(--font-body); }
+
+/* ─── Animations ────────────────────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-fade-in-up { animation: fadeInUp 0.5s ease forwards; }
+.animate-fade-in { animation: fadeIn 0.4s ease forwards; }
+.animate-scale-in { animation: scaleIn 0.3s ease forwards; }
+
+.skeleton {
+  background: linear-gradient(90deg, var(--color-soul-border) 25%, var(--color-soul-border-light) 50%, var(--color-soul-border) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+
+/* ─── OTP Input ─────────────────────────────────────────────────────────────── */
+.otp-input {
+  width: 3.5rem;
+  height: 3.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  border: 2px solid var(--color-soul-border);
+  border-radius: 12px;
+  background: var(--color-soul-card);
+  color: var(--color-soul-primary);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.otp-input:focus {
+  border-color: var(--color-soul-accent);
+  box-shadow: 0 0 0 3px rgba(201, 168, 106, 0.2);
+}
+
+/* ─── Progress Steps ─────────────────────────────────────────────────────────── */
+.step-connector {
+  flex: 1;
+  height: 1px;
+  background: var(--color-soul-border);
+  margin: 0 0.5rem;
+  position: relative;
+  top: -12px;
+}
+.step-connector.active { background: var(--color-soul-accent); }
+
+/* ─── Sidebar ─────────────────────────────────────────────────────────────────── */
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  color: var(--color-soul-text-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.sidebar-link:hover {
+  background: var(--color-soul-surface);
+  color: var(--color-soul-primary);
+}
+.sidebar-link.active {
+  background: rgba(201, 168, 106, 0.12);
+  color: var(--color-soul-primary);
+  font-weight: 600;
+}
+.sidebar-link.active svg { color: var(--color-soul-accent); }
+
+/* ─── Calendar ─────────────────────────────────────────────────────────────── */
+.calendar-day {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+.calendar-day:hover { background: var(--color-soul-surface); color: var(--color-soul-primary); }
+.calendar-day.available:hover { background: rgba(201, 168, 106, 0.2); }
+.calendar-day.selected { background: var(--color-soul-accent); color: #fff; font-weight: 600; }
+.calendar-day.today { border: 1.5px solid var(--color-soul-accent); color: var(--color-soul-primary); }
+.calendar-day.disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* ─── Tab styles ─────────────────────────────────────────────────────────────── */
+.soul-tab {
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--color-soul-text-muted);
+  transition: background 0.2s, color 0.2s;
+}
+.soul-tab.active {
+  background: var(--color-soul-primary);
+  color: #fff;
+}
+.soul-tab:hover:not(.active) {
+  background: var(--color-soul-surface);
+  color: var(--color-soul-primary);
+}
+
+/* ─── Tooltip ─────────────────────────────────────────────────────────────────── */
+.recharts-default-tooltip {
+  background: var(--color-soul-card) !important;
+  border: 1px solid var(--color-soul-border) !important;
+  border-radius: 12px !important;
+  box-shadow: var(--shadow-card) !important;
+  font-family: var(--font-body) !important;
+  font-size: 13px !important;
+}
